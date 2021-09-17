@@ -196,6 +196,7 @@ include_directories(
 
 install(PROGRAMS
    src/point_speech.py
+   src/point_service.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
