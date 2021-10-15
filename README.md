@@ -19,7 +19,7 @@ cd ../
 catkin_make --pkg turtlebro_excursions
 ```
 
-### Тестирование text-to-speach
+### Тестирование text-to-speech
 
 ```
 echo "Однажды, в студеную зимнюю пору Я из лесу вышел. Был сильный мороз." | festival --tts --language russian
