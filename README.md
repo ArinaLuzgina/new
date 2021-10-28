@@ -36,11 +36,12 @@ alsamixer
 ```
 roslaunch turtlebro_excursions excursion.launch
 ```
-
 Запуск ноды патрулирования и режима в которой робот считывает и озвучивает aruco маркеры
 ```
 roslaunch turtlebro_excursions excursion_aruco.launch
 ```
+_Важное примечание!_ 
+Для того, чтобы робот начал считывать aruco маркеры, необходимо переключить работу камеры с веб-интерфейса на публикацию данных в ROS. Подробнее об этом в инструкции: https://manual.turtlebro.ru/paket-turtlebro/video
 
 ### Работа пакета
 
