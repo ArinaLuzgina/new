@@ -40,7 +40,8 @@ roslaunch turtlebro_excursions excursion.launch
 ```
 roslaunch turtlebro_excursions excursion_aruco.launch
 ```
-_Важное примечание!_ 
+_Важное примечание!_
+
 Для того, чтобы робот начал считывать aruco маркеры, необходимо переключить работу камеры с веб-интерфейса на публикацию данных в ROS. Подробнее об этом в инструкции: https://manual.turtlebro.ru/paket-turtlebro/video
 
 ### Работа пакета
