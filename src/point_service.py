@@ -13,7 +13,7 @@ def handle_request(req:PatrolPointCallbackRequest):
 
     point_name = req.patrol_point.name
     
-    text = "Местоположение не известно"
+    text = "Местоположение неизвестно"
     
     if point_name == "1":
         text = "Я в точке 1"
