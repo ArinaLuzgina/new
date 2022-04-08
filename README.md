@@ -13,7 +13,7 @@ sudo apt install festvox-ru
 #### Установить пакет ROS 
 
 ```
-cd catkin_ws/src
+cd ~/catkin_ws/src
 git clone https://github.com/voltbro/turtlebro_excursions
 cd ../
 catkin_make --pkg turtlebro_excursions
