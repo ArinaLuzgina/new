@@ -14,9 +14,9 @@ sudo apt install festvox-ru
 
 ```
 cd ~/catkin_ws/src
-git clone https://github.com/voltbro/turtlebro_excursions
+git clone https://github.com/ArinaLuzgina/ws_turtlebro_package
 cd ../
-catkin_make --pkg turtlebro_excursions
+catkin_make --pkg ws_turtlebro_package
 ```
 
 ### Тестирование text-to-speech
@@ -32,13 +32,10 @@ alsamixer
 
 ### Запуск пакета
 
-Запуск ноды патрулирования и режима в которой робот озвучивает по координатам точки патрулирования
-```
-roslaunch turtlebro_excursions excursion.launch
 ```
 Запуск ноды патрулирования и режима в которой робот считывает и озвучивает aruco маркеры
 ```
-roslaunch turtlebro_excursions excursion_aruco.launch
+roslaunch ws_turtlebro_package excursion_aruco.launch
 ```
 _Важное примечание!_
 
@@ -54,7 +51,7 @@ _Важное примечание!_
   <!--Patrol Node -->
   <node pkg="turtlebro_patrol" type="patrol.py" name="turtlebro_patrol" output="screen" required="true">
     <param name="waypoints_data_file" value="$(arg waypoints_data_file)"/>    
-    <param name="point_callback_service" value="turtlebro_excursion"/>    
+    <param name="point_callback_service" value="ws_turtlebro_package"/>    
   </node>
 ```  
 
@@ -74,3 +71,5 @@ uint16 size
 Где 
 `id` Номер найденного маркера
 `size` Размер маркера (для оценки расстояния)
+# ws_turtlebro_excursion
+# ws_excursion
