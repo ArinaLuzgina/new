@@ -6,7 +6,7 @@ import rospy
 from cv_bridge import CvBridge
 from sensor_msgs.msg import CompressedImage  
 # from std_msgs.msg import Empty
-from turtlebro_excursions.srv import ArucoDetect, ArucoDetectResponse 
+from ws_turtlebro_package.srv import ArucoDetect, ArucoDetectResponse 
 
 class ArucoDetectService():
 
