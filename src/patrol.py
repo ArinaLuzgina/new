@@ -15,7 +15,7 @@ from std_msgs.msg import String
 from turtlebro_patrol.msg import PatrolPoint
 from turtlebro_patrol.srv import PatrolPointCallback, PatrolPointCallbackRequest
 from ws_turtlebro_package.srv import WayLan_Choice
-
+from std_msgs.msg import UInt16
 #Import standard Pose msg types and TF transformation to deal with quaternions
 from tf.transformations import quaternion_from_euler
 
@@ -60,6 +60,7 @@ class Patrol(object):
         resp = service_caller()
         self.way_before = resp.way
         self.way_now = self.way_before
+        self.pub = pub = rospy.Publisher('/led_color', UInt16, queue_size = 2)
     def init_callback_service(self, service_name):
 
         if service_name:
@@ -77,6 +78,8 @@ class Patrol(object):
     def move(self):
 
         self.patrol_points = self.fetch_points(self.waypoints_data_file)
+        
+        self.pub.publish(3)
         if self.way_now == 2:
             sp_sp = self.patrol_points[1:]
             self.patrol_points = [self.patrol_points[0]] + sp_sp[::-1]
@@ -117,19 +120,21 @@ class Patrol(object):
 
     def get_patrol_point(self, command):
         # point_type: [start current next home]
-
+        rospy.loginfo('which command')
         if command == 'home':
             self.current_point = 0
 
         if command == 'start':
             self.current_point = 1  
-
+            self.pub.publish(1)
         if command == 'next':
             # cycle patrol points
+            rospy.loginfo('point_time')
             self.current_point += 1
             if self.current_point >= len(self.patrol_points):
-               self.current_point = 1 
-        if command in ['start', 'next']:
+                rospy.loginfo('+')
+                self.current_point = 1 
+        if command in ['start']:
             rospy.wait_for_service("button_srv")
             service_caller = rospy.ServiceProxy("button_srv", WayLan_Choice)
             resp = service_caller()
@@ -167,8 +172,10 @@ class Patrol(object):
                 rospy.loginfo("Call patroll Service: finish")
 
             # renew patrol point if on patroll mode
+            rospy.loginfo('{}'.format(self.on_patrol))
             if self.on_patrol:
                 next_patrol_point = self.get_patrol_point('next')
+                rospy.loginfo('{}'.format(next_patrol_point))
                 rospy.sleep(0.5)  # small pause in point
                 self.goal = self.goal_message_assemble(next_patrol_point)  
 
@@ -228,6 +235,7 @@ if __name__ == '__main__':
     try:
         rospy.init_node('turtlebro_patroll')
         patrol = Patrol()
+        
         patrol.move()
 
     except rospy.ROSInterruptException:
